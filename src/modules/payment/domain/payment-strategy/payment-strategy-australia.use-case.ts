@@ -1,6 +1,10 @@
 import { PaymentStrategy } from './payment-strategy.model';
 
 export class PaymentStrategAustralia implements PaymentStrategy {
+  getCurrency(): string {
+    return 'AUD';
+  }
+
   getCurrencySign(): string {
     return '$';
   }

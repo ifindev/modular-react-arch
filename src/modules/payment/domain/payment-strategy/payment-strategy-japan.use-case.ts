@@ -1,6 +1,10 @@
 import { PaymentStrategy } from './payment-strategy.model';
 
 export class PaymentStrategyJapan implements PaymentStrategy {
+  getCurrency(): string {
+    return 'JPY';
+  }
+
   getCurrencySign(): string {
     return '¥';
   }
