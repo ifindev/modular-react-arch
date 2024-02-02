@@ -1,4 +1,5 @@
-import { PaymentMethod } from '../domain/payment-method.model';
+import { formatDonationMessage } from '../domain/donation/donation.use-case';
+import { PaymentMethod } from '../domain/payment/payment-method.model';
 import useDonation from '../hooks/use-donation';
 import PaymentMethods from './payment-methods';
 
@@ -23,11 +24,7 @@ export default function Payment({ amount, paymentMethods }: Props) {
           onChange={updateAgreeToDonate}
           checked={agreeToDonate}
         />
-        <p>
-          {agreeToDonate
-            ? 'Thanks for your donation.'
-            : `I would like to donate $${tip} to charity.`}
-        </p>
+        <p>{formatDonationMessage({ tip, agreeToDonate })}</p>
       </label>
       <div>
         <button className="bg-red-600 text-white font-bold py-1 px-3 rounded">

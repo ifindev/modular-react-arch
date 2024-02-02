@@ -12,3 +12,15 @@ export function calculateDonationSummary({
     tip: parseFloat((Math.floor(amount + 1) - amount).toPrecision(10)),
   };
 }
+
+export function formatDonationMessage({
+  tip,
+  agreeToDonate,
+}: {
+  agreeToDonate: boolean;
+  tip: number;
+}) {
+  return agreeToDonate
+    ? 'Thanks for your donation.'
+    : `I would like to donate $${tip} to charity.`;
+}
