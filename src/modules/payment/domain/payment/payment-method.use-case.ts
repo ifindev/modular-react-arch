@@ -1,4 +1,4 @@
-import { getRemotePaymentMethods } from '../../../apis/api';
+import { getRemotePaymentMethods } from '../../../../apis/api';
 import { PaymentMethod } from './payment-method.model';
 import { RemotePaymentMethod } from './payment.type';
 

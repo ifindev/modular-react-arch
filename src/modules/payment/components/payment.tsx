@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
 import { PaymentMethod } from '../domain/payment-method.model';
+import useDonation from '../hooks/use-donation';
 import PaymentMethods from './payment-methods';
 
 type Props = {
@@ -8,15 +8,8 @@ type Props = {
 };
 
 export default function Payment({ amount, paymentMethods }: Props) {
-  const [agreeToDonate, setAgreeToDonate] = useState(false);
-
-  const { total, tip } = useMemo(
-    () => ({
-      total: agreeToDonate ? Math.floor(amount + 1) : amount,
-      tip: parseFloat((Math.floor(amount + 1) - amount).toPrecision(10)),
-    }),
-    [agreeToDonate, amount]
-  );
+  const { total, tip, agreeToDonate, updateAgreeToDonate } =
+    useDonation(amount);
 
   return (
     <div className="flex flex-col gap-2">
@@ -27,7 +20,7 @@ export default function Payment({ amount, paymentMethods }: Props) {
       <label htmlFor="donation" className="flex items-center gap-3">
         <input
           type="checkbox"
-          onChange={() => setAgreeToDonate((prev) => !prev)}
+          onChange={updateAgreeToDonate}
           checked={agreeToDonate}
         />
         <p>

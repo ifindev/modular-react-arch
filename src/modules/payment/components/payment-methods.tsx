@@ -1,4 +1,4 @@
-import { PaymentMethod } from '../domain/payment-method.model';
+import { PaymentMethod } from '../domain/payment/payment-method.model';
 
 type Props = {
   paymentMethods: PaymentMethod[];
