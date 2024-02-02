@@ -1,4 +1,4 @@
-import Payment from './components/payment/Payment';
+import Payment from './components/payment/payment';
 
 function App() {
   return (
