@@ -1,4 +1,4 @@
-import { RemotePaymentMethod } from '../model/payment.model';
+import { RemotePaymentMethod } from '../types/payment.type';
 
 export async function getRemotePaymentMethods(): Promise<
   RemotePaymentMethod[]

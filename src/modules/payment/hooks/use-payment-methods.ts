@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getRemotePaymentMethods } from '../../apis/api';
-import { LocalPaymentMethod } from '../../model/payment.model';
+import { getRemotePaymentMethods } from '../../../apis/api';
+import { LocalPaymentMethod } from '../domain/payment.type';
 
 export default function usePaymentMethods() {
   const [paymentMethods, setPaymentMethods] = useState<LocalPaymentMethod[]>(

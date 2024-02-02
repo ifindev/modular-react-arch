@@ -1,4 +1,4 @@
-import { LocalPaymentMethod } from '../../model/payment.model';
+import { LocalPaymentMethod } from '../domain/payment.type';
 
 type Props = {
   paymentMethods: LocalPaymentMethod[];

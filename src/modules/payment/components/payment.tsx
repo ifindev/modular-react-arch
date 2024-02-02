@@ -1,13 +1,12 @@
-import PaymentMethods from '../payment-methods/payment-methods';
-import usePaymentMethods from './use-payment-methods';
+import { LocalPaymentMethod } from '../domain/payment.type';
+import PaymentMethods from './payment-methods';
 
 type Props = {
   amount: number;
+  paymentMethods: LocalPaymentMethod[];
 };
 
-export default function Payment({ amount }: Props) {
-  const { paymentMethods } = usePaymentMethods();
-
+export default function Payment({ amount, paymentMethods }: Props) {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-bold text-lg">Payment</h3>

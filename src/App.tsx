@@ -1,9 +1,9 @@
-import Payment from './components/payment/payment';
+import PaymentView from './modules/payment/views/payment.view';
 
 function App() {
   return (
     <section className="flex items-center justify-center h-screen w-full">
-      <Payment amount={100} />
+      <PaymentView />
     </section>
   );
 }
