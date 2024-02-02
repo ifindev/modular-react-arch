@@ -1,7 +1,7 @@
-import { LocalPaymentMethod } from '../domain/payment.type';
+import { PaymentMethod } from '../domain/payment-method.model';
 
 type Props = {
-  paymentMethods: LocalPaymentMethod[];
+  paymentMethods: PaymentMethod[];
 };
 
 export default function PaymentMethods({ paymentMethods }: Props) {
@@ -17,7 +17,7 @@ export default function PaymentMethods({ paymentMethods }: Props) {
             type="radio"
             name="payment"
             value={method.provider}
-            defaultChecked={method.provider === 'cash'}
+            defaultChecked={method.isDefaultMethod}
           />
           <span>{method.label}</span>
         </label>

@@ -1,9 +1,9 @@
-import { LocalPaymentMethod } from '../domain/payment.type';
+import { PaymentMethod } from '../domain/payment-method.model';
 import PaymentMethods from './payment-methods';
 
 type Props = {
   amount: number;
-  paymentMethods: LocalPaymentMethod[];
+  paymentMethods: PaymentMethod[];
 };
 
 export default function Payment({ amount, paymentMethods }: Props) {

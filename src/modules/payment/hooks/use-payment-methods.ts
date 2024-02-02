@@ -1,33 +1,17 @@
 import { useEffect, useState } from 'react';
-import { getRemotePaymentMethods } from '../../../apis/api';
-import { LocalPaymentMethod } from '../domain/payment.type';
+import { PaymentMethod } from '../domain/payment-method.model';
+import { fetchPaymentMethods } from '../domain/payment-method.use-case';
 
 export default function usePaymentMethods() {
-  const [paymentMethods, setPaymentMethods] = useState<LocalPaymentMethod[]>(
-    []
-  );
+  const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
 
   useEffect(() => {
-    const fetchPaymentMethods = async () => {
-      const methods = await getRemotePaymentMethods();
-
-      if (methods.length > 0) {
-        const localPaymentMethods: LocalPaymentMethod[] = methods.map(
-          (method) => ({
-            provider: method.name,
-            label: `Pay with ${method.name}`,
-          })
-        );
-
-        // Cash is mandatory option
-        localPaymentMethods.push({ provider: 'cash', label: 'Pay in cash' });
-        setPaymentMethods(localPaymentMethods);
-      } else {
-        setPaymentMethods([]);
-      }
+    const fetchPaymentMethodsData = async () => {
+      const methods = await fetchPaymentMethods();
+      setPaymentMethods(methods);
     };
 
-    fetchPaymentMethods();
+    fetchPaymentMethodsData();
   }, []);
 
   return { paymentMethods };
