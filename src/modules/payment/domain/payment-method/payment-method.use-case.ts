@@ -1,6 +1,6 @@
 import { getRemotePaymentMethods } from '../../../../apis/api';
 import { PaymentMethod } from './payment-method.model';
-import { RemotePaymentMethod } from './payment.type';
+import { RemotePaymentMethod } from './payment-method.type';
 
 const payInCash = new PaymentMethod({ name: 'cash' });
 

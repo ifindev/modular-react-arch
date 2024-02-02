@@ -1,17 +1,21 @@
-import { formatDonationMessage } from '../domain/donation/donation.use-case';
-import { PaymentMethod } from '../domain/payment/payment-method.model';
+import { PaymentMethod } from '../domain/payment-method/payment-method.model';
+import { PaymentStrategy } from '../domain/payment-strategy/payment-strategy.model';
 import useDonation from '../hooks/use-donation';
+import { formatDonationMessage } from '../utils/formatter.utill';
 import DonationCheckbox from './donation-checkbox';
 import PaymentMethods from './payment-methods';
 
 type Props = {
   amount: number;
   paymentMethods: PaymentMethod[];
+  strategy: PaymentStrategy;
 };
 
-export default function Payment({ amount, paymentMethods }: Props) {
-  const { total, tip, agreeToDonate, updateAgreeToDonate } =
-    useDonation(amount);
+export default function Payment({ amount, paymentMethods, strategy }: Props) {
+  const { total, donation, agreeToDonate, updateAgreeToDonate } = useDonation({
+    amount,
+    strategy,
+  });
 
   return (
     <div className="flex flex-col gap-2">
@@ -22,11 +26,12 @@ export default function Payment({ amount, paymentMethods }: Props) {
       <DonationCheckbox
         onChange={updateAgreeToDonate}
         checked={agreeToDonate}
-        label={formatDonationMessage({ tip, agreeToDonate })}
+        label={formatDonationMessage({ donation, agreeToDonate, strategy })}
       />
       <div>
         <button className="bg-red-600 text-white font-bold py-1 px-3 rounded">
-          ${total}
+          {strategy.getCurrencySign()}
+          {total}
         </button>
       </div>
     </div>

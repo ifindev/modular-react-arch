@@ -1,12 +1,20 @@
 import { useMemo, useState } from 'react';
-import { calculateDonationSummary } from '../domain/donation/donation.use-case';
+import { PaymentStrategy } from '../domain/payment-strategy/payment-strategy.model';
 
-export default function useDonation(amount: number) {
+type Args = {
+  amount: number;
+  strategy: PaymentStrategy;
+};
+
+export default function useDonation({ amount, strategy }: Args) {
   const [agreeToDonate, setAgreeToDonate] = useState(false);
 
-  const { total, tip } = useMemo(
-    () => calculateDonationSummary({ amount, agreeToDonate }),
-    [agreeToDonate, amount]
+  const { total, donation } = useMemo(
+    () => ({
+      total: agreeToDonate ? strategy.getTotalPayment(amount) : amount,
+      donation: strategy.getDonationAmount(amount),
+    }),
+    [agreeToDonate, amount, strategy]
   );
 
   const updateAgreeToDonate = () => {
@@ -15,7 +23,7 @@ export default function useDonation(amount: number) {
 
   return {
     total,
-    tip,
+    donation,
     agreeToDonate,
     updateAgreeToDonate,
   };
